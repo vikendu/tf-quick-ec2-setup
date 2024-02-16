@@ -1,4 +1,5 @@
 resource "aws_instance" "app_server" {
+  count = var.instance_count
   ami           = "ami-0ecb0bb5d6b19457a"
   instance_type = "t2.micro"
   key_name      = "ssh_key-tf"
@@ -7,6 +8,6 @@ resource "aws_instance" "app_server" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "aws-instance-tf"
+    Name = "aws-box-tf-${count.index + 1}"
   }
 }

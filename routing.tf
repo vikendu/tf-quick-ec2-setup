@@ -1,5 +1,6 @@
 resource "aws_eip" "public-ip-tf" {
-  instance = "${aws_instance.app_server.id}"
+  count = var.instance_count
+  instance = "${aws_instance.app_server[count.index].id}"
   vpc      = true
 }
 
